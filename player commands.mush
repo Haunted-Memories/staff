@@ -44,6 +44,8 @@ think set(%!, VP:[ifelse(isdbref(setr(!, searchng(name=%[Commands%] Staff Lists)
 -
 think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists), OBJECT)), r(OBJECT), create(%[Functions%] Staff Lists, 10, T))])
 -
+think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OBJECT)), r(OBJECT), create(%[Data%] Staff Lists, 10, T))])
+-
 
 @set                                    %vP = !SAFE
 -
@@ -55,6 +57,9 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 -
 
 @force                                  %! = @vF %vP = %vF
+-
+
+@force                                  %! = @vD %vP = %vD
 -
 
 ## ################################## ##

@@ -42,6 +42,8 @@
 ## ################################## ##
 think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists), OBJECT)), r(OBJECT), create(%[Functions%] Staff Lists, 10, T))])
 -
+think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OBJECT)), r(OBJECT), create(%[Data%] Staff Lists, 10, T))])
+-
 
 @set                                    %vF = !SAFE
 -
@@ -55,20 +57,23 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 @force                                  %! = @vF %vF = %vF
 -
 
+@force                                  %! = @vD %vP = %vD
+-
+
 ## ################################## ##
 ## FUNCTIONS
 ## ################################## ##
 &COL.NAME                               %vF = moniker(%0)[ifelse(hasattr(%0, ALIAS), %b%([xget(%0, ALIAS)]%),)]
 -
-&COL.NOTES                              %vF = xget(%vF, NOTE.%0)
+&COL.NOTES                              %vF = xget(%vD, NOTE.%0)
 -
 &COL.STATUS                             %vF = ifelse(
     ulocal(%vF/FIL.CONNECTED, %0),
-    ljust(ucstr(default(%0/STATUS, On-Duty)), 8)[rjust(singletime(idle(%0)), 4)],
+    ansi(h,ljust(ucstr(default(%0/STATUS, On-Duty)), 8)[rjust(singletime(idle(%0)), 4)]),
     timefmt($b $02D $02h:$02T, convtime(xget(%0, LASTOFF)))
 )
 -
-&COL.MEMBERS                            %vF = words(xget(%!, LIST.%0))
+&COL.MEMBERS                            %vF = words(xget(%vD, LIST.%0))
 -
 &F.FOOTER                               %vF = tail()
 -
@@ -79,7 +84,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 &F.HEADER                               %vF = header(%0)
 -
 &F.COLUMN_HEADERS                       %vF = ansi(h, edit(iter(
-    xget(%vF, D.%0_COLUMNS),
+    xget(%vD, D.%0_COLUMNS),
     ljc(
         before(itext(0), :),
         after(itext(0), :)
@@ -88,7 +93,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 ),|,))
 -
 &F.LIST                                 %vF = list(%0, edit(iter(
-    xget(%vF, D.%1_COLUMNS),
+    xget(%vD, D.%1_COLUMNS),
     ljc(
         ulocal(%vF/COL.[before(itext(0), :)], itext(1)),
         after(itext(0), :)
@@ -126,7 +131,7 @@ think ulocal(%vF/F.LIST, v(D.TEAMS), TEAM, |, %#);
 -
 
 &I.LIST_TEAM_MEMBERS                    %vF =
-think setq(!, xget(%vF, LIST.%0), TEAM);
+think setq(!, xget(%vD, LIST.%0), TEAM);
 @pemit %# = ulocal(%vF/F.HEADER, Staff);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, STAFF);
 @pemit %# = ulocal(%vF/F.SEPARATOR, capstr(%0) Team);
