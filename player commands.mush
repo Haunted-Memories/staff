@@ -54,7 +54,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 @set                                    %vP = SAFE
 -
 
-@sudo                                   %! = @vP %vA = %vF
+@sudo                                   %! = @vF %vP = %vF
 -
 
 ## ################################## ##
