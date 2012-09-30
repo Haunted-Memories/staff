@@ -1,0 +1,128 @@
+## ########################################################################## ##
+## __          __   _ _   _                  _
+## \ \        / /  (_) | | |                | |
+##  \ \  /\  / / __ _| |_| |__    _ __   ___| |_
+##   \ \/  \/ / '__| | __| '_ \  | '_ \ / _ \ __|
+##    \  /\  /| |  | | |_| | | |_| | | |  __/ |_
+##     \/  \/ |_|  |_|\__|_| |_(_)_| |_|\___|\__|
+##
+## @created     29th September 2012
+## @edited      30th September 2012
+## @package     Staff
+##
+## Copyright (C) 2012 Kevin Kragenbrink <kevin@writh.net>
+##
+## Permission is hereby granted, free of charge, to any person obtaining a
+## copy of this software and associated documentation files (the "Software"),
+## to deal in the Software without restriction, including without limitation
+## the rights to use, copy, modify, merge, publish, distribute, sublicense,
+## and/or sell copies of the Software, and to permit persons to whom the
+## Software is furnished to do so, subject to the following conditions:
+##
+## The above copyright notice and this permission notice shall be included in
+## all copies or substantial portions of the Software.
+##
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+## FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+## DEALINGS IN THE SOFTWARE.
+## ########################################################################## ##
+
+## ################################## ##
+## Starting up
+## ################################## ##
+@set                                    %! = QUIET
+-
+
+## ################################## ##
+## Set up the Objects
+## ################################## ##
+think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists), OBJECT)), r(OBJECT), create(%[Functions%] Staff Lists, 10, T))])
+-
+
+@set                                    %vF = !SAFE
+-
+
+@wipe                                   %vF
+-
+
+@set                                    %vF = SAFE
+-
+
+## ################################## ##
+## FUNCTIONS
+## ################################## ##
+&COL.NAME                               %vF = moniker(%0)[ifelse(hasattr(%0, ALIAS), %b%([xget(%0, ALIAS)]%),)]
+-
+&COL.NOTES                              %vF = xget(%!, NOTE.%0)
+-
+&COL.STATUS                             %vF = ifelse(
+    ulocal(%!/FIL.CONNECTED, %0),
+    ljust(ucstr(default(%0/STATUS, On-Duty)), 9)[rjust(singletime(idle(%0)), 4)],
+    timefmt($b $02D $02h:$02T, xget(%0, LASTOFF))
+)
+-
+&COL.MEMBERS                            %vF = words(xget(%!, LIST.%0))
+-
+&F.FOOTER                               %vF = tail();
+-
+&F.GET_DIRECTORS                        %vF = xget(#1762, LIST-CHIEFS)
+-
+&F.GET_ADMINS                           %vF = setdiff(xget(#1762, LIST-STAFF), ulocal(%vF/F.GET_DIRECTORS))
+-
+&F.HEADER                               %vF = header(%0)
+-
+&F.COLUMN_HEADERS                       %vF = ansi(h, nsiter(
+    xget(%vF, D.%0_COLUMNS),
+    ljc(
+        before(itext(0), :),
+        after(itext(0), :)
+    ),
+    |
+))
+-
+&F.LIST                                 %vF = list(%0, nsiter(
+    xget(%vF, D.%1_COLUMNS),
+    ljc(
+        ulocal(%vF/COL.[before(itext(0), :)], itext(1)),
+        after(itext(0), :)
+    ),
+    %2
+))
+-
+&F.SEPARATOR                            %vF = separator(%0, c);
+-
+&FIL.CONNECTED                          %vF = cand(gt(conn(%0), -1), not(hasflag(%0), DARK))
+-
+
+## ################################## ##
+## Includes
+## ################################## ##
+&I.LIST_STAFF                           %vF =
+think setq(!, ulocal(%vF/F.GET_DIRECTORS), DIRECTORS);
+think setq(!, ulocal(%vF/F.GET_ADMINS), ADMINS);
+think setq(!, ifelse(%0, filter(%vF/FIL.CONNECTED, r(DIRECTORS)), r(DIRECTORS)), DIRECTORS);
+think setq(!, ifelse(%0, filter(%vF/FIL.CONNECTED, r(ADMINS)), r(ADMINS)), ADMINS);
+@pemit %# = ulocal(%vF/F.HEADER, ifelse(%0, Connected,) Staff);
+@pemit %# = ulocal(%vF/F.COLUMN_HEADERS, STAFF);
+@pemit %# = ulocal(%vF/F.SEPARATOR, Directors);
+@pemit %# = ulocal(%vF/F.LIST, r(DIRECTORS), STAFF);
+@pemit %# = ulocal(%vF/F.SEPARATOR, Admins);
+@pemit %# = ulocal(%vF/F.LIST, r(ADMINS), STAFF);
+@pemit %# = ulocal(%vF/F.FOOTER);
+-
+
+&I.LIST_TEAMS                           %vF =
+@pemit %# = ulocal(%vF/F.HEADER, Staff Teams);
+@pemit %# = ulocal(%vF/F.COLUMN_HEADERS, TEAM);
+@pemit %# = ulocal(%vF/F.LIST, v(D.TEAMS), TEAM, |);
+@pemit %# = ulocal(%vF/F.FOOTER);
+-
+
+## ################################## ##
+## Finishing Up
+## ################################## ##
+@set                                    %! = !QUIET
