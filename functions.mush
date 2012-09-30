@@ -84,14 +84,15 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
     |
 ))
 -
-&F.LIST                                 %vF = list(%0, nsiter(
+&F.LIST                                 %vF = list(%0, edit(iter(
     xget(%vF, D.%1_COLUMNS),
     ljc(
         ulocal(%vF/COL.[before(itext(0), :)], itext(1)),
         after(itext(0), :)
     ),
-    %2
-),,,%3)
+    %2,
+    |
+),|,),,,%3)
 -
 &F.SEPARATOR                            %vF = separator(%0, c);
 -
