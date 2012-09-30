@@ -52,6 +52,9 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 @set                                    %vF = SAFE
 -
 
+@sudo                                   %! = @vF %vF = %vF
+-
+
 ## ################################## ##
 ## FUNCTIONS
 ## ################################## ##
@@ -75,24 +78,23 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 -
 &F.HEADER                               %vF = header(%0)
 -
-&F.COLUMN_HEADERS                       %vF = ansi(h, nsiter(
+&F.COLUMN_HEADERS                       %vF = ansi(h, edit(iter(
     xget(%vF, D.%0_COLUMNS),
     ljc(
         before(itext(0), :),
         after(itext(0), :)
-    ),
+    ),,
     |
-))
+),|,%b))
 -
 &F.LIST                                 %vF = list(%0, edit(iter(
     xget(%vF, D.%1_COLUMNS),
     ljc(
         ulocal(%vF/COL.[before(itext(0), :)], itext(1)),
         after(itext(0), :)
-    ),
-    %2,
+    ),,
     |
-),|,),,,%3)
+),|,),%2,,%3)
 -
 &F.SEPARATOR                            %vF = separator(%0, c);
 -
