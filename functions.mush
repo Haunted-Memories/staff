@@ -126,7 +126,7 @@ think ulocal(%vF/F.LIST, v(D.TEAMS), TEAM, |, %#);
 -
 
 &I.LIST_TEAM_MEMBERS                    %vF =
-think setq(!, xget(%vF, DATA.%0), TEAM);
+think setq(!, xget(%vF, LIST.%0), TEAM);
 @pemit %# = ulocal(%vF/F.HEADER, Staff);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, STAFF);
 @pemit %# = ulocal(%vF/F.SEPARATOR, capstr(%0) Team);

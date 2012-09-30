@@ -54,7 +54,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 @set                                    %vP = SAFE
 -
 
-@sudo                                   %! = @vF %vP = %vF
+@force                                  %! = @vF %vP = %vF
 -
 
 ## ################################## ##
@@ -101,7 +101,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 @set                                    %vP/C.+STAFF/TEAM = USELOCK
 -
 &~C.+STAFF/TEAM                         %vP = [t(match(xget(%vF, D.TEAMS), after(%x,+staff/), |))]
- -
+-
 
 ## Syntax:
 ##   +teams
