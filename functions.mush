@@ -95,7 +95,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 -
 &F.SEPARATOR                            %vF = separator(%0, c);
 -
-&FIL.CONNECTED                          %vF = cand(gt(conn(%0), -1), not(hasflag(%0), DARK))
+&FIL.CONNECTED                          %vF = cand(gt(conn(%0), -1), not(hasflag(%0, DARK)))
 -
 
 ## ################################## ##
