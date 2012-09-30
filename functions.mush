@@ -79,7 +79,13 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 -
 &COL.MEMBERS                            %vF = words(xget(%vD, LIST.%0))
 -
-&F.FOOTER                               %vF = tail()
+&COL.DESCRIPTION                        %vF = xget(%vD, DESC.%0)
+-
+&F.FOOTER                               %vF = ifelse(
+    t(%0),
+    %cc[repeat(=, sub(width(%#), add(strlen(%0), 11)))] %%(%cn %ch%cw%0%cn %cc%)=====%cn,
+    repeat(=, width(%#))
+)
 -
 &F.GET_DIRECTORS                        %vF = xget(#1762, LIST-CHIEFS)
 -
