@@ -105,7 +105,7 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 -
 @set                                    %vP/C.+STAFF/TEAM = USELOCK
 -
-&~C.+STAFF/TEAM                         %vP = [t(match(xget(%vF, D.TEAMS), after(%x,+staff/), |))]
+&~C.+STAFF/TEAM                         %vP = [t(match(xget(%vD, D.TEAMS), after(%x,+staff/), |))]
 -
 
 ## Syntax:
@@ -113,7 +113,7 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 ##
 ## Description:
 ##   Lists all staff teams.
-&C.+TEAMS                               %vA = $+teams:@include %vF/I.LIST_TEAMS;
+&C.+TEAMS                               %vP = $+teams:@include %vF/I.LIST_TEAMS;
 -
 
 ## ################################## ##

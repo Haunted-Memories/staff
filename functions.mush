@@ -57,7 +57,7 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 @force                                  %! = @vF %vF = %vF
 -
 
-@force                                  %! = @vD %vP = %vD
+@force                                  %! = @vD %vF = %vD
 -
 
 ## ################################## ##
@@ -126,7 +126,7 @@ think ulocal(%vF/F.LIST, r(ADMINS), STAFF, %b, %#);
 &I.LIST_TEAMS                           %vF =
 @pemit %# = ulocal(%vF/F.HEADER, Staff Teams);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, TEAM);
-think ulocal(%vF/F.LIST, v(D.TEAMS), TEAM, |, %#);
+think ulocal(%vF/F.LIST, xget(%vD, D.TEAMS), TEAM, |, %#);
 @pemit %# = ulocal(%vF/F.FOOTER);
 -
 
