@@ -85,7 +85,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
         after(itext(0), :)
     ),,
     |
-),|,%b))
+),|,))
 -
 &F.LIST                                 %vF = list(%0, edit(iter(
     xget(%vF, D.%1_COLUMNS),
@@ -112,16 +112,16 @@ think setq(!, ifelse(%0, filter(%vF/FIL.CONNECTED, r(ADMINS)), r(ADMINS)), ADMIN
 @pemit %# = ulocal(%vF/F.HEADER, ifelse(%0, Connected,) Staff);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, STAFF);
 @pemit %# = ulocal(%vF/F.SEPARATOR, Directors);
-@pemit %# = ulocal(%vF/F.LIST, r(DIRECTORS), STAFF, %b, %#);
+think ulocal(%vF/F.LIST, r(DIRECTORS), STAFF, %b, %#);
 @pemit %# = ulocal(%vF/F.SEPARATOR, Admins);
-@pemit %# = ulocal(%vF/F.LIST, r(ADMINS), STAFF, %b, %#);
+think ulocal(%vF/F.LIST, r(ADMINS), STAFF, %b, %#);
 @pemit %# = ulocal(%vF/F.FOOTER);
 -
 
 &I.LIST_TEAMS                           %vF =
 @pemit %# = ulocal(%vF/F.HEADER, Staff Teams);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, TEAM);
-@pemit %# = ulocal(%vF/F.LIST, v(D.TEAMS), TEAM, |, %#);
+think ulocal(%vF/F.LIST, v(D.TEAMS), TEAM, |, %#);
 @pemit %# = ulocal(%vF/F.FOOTER);
 -
 
