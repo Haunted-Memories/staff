@@ -100,8 +100,8 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 -
 @set                                    %vP/C.+STAFF/TEAM = USELOCK
 -
-&~C.+STAFF/TEAM                         %vP = [t(match(%0, xget(%vF, D.TEAMS), |))]
--
+&~C.+STAFF/TEAM                         %vP = [t(match(xget(%vF, D.TEAMS), after(%x,+staff/), |))]
+ -
 
 ## Syntax:
 ##   +teams
