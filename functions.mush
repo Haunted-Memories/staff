@@ -52,7 +52,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 @set                                    %vF = SAFE
 -
 
-@sudo                                   %! = @vF %vF = %vF
+@force                                  %! = @vF %vF = %vF
 -
 
 ## ################################## ##
@@ -94,7 +94,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
         after(itext(0), :)
     ),,
     |
-),|,),%2,,%3)
+),|,), %2,,%3)
 -
 &F.SEPARATOR                            %vF = separator(%0, c);
 -
@@ -112,9 +112,9 @@ think setq(!, ifelse(%0, filter(%vF/FIL.CONNECTED, r(ADMINS)), r(ADMINS)), ADMIN
 @pemit %# = ulocal(%vF/F.HEADER, ifelse(%0, Connected,) Staff);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, STAFF);
 @pemit %# = ulocal(%vF/F.SEPARATOR, Directors);
-@pemit %# = ulocal(%vF/F.LIST, r(DIRECTORS), STAFF, , %#);
+@pemit %# = ulocal(%vF/F.LIST, r(DIRECTORS), STAFF, %b, %#);
 @pemit %# = ulocal(%vF/F.SEPARATOR, Admins);
-@pemit %# = ulocal(%vF/F.LIST, r(ADMINS), STAFF, , %#);
+@pemit %# = ulocal(%vF/F.LIST, r(ADMINS), STAFF, %b, %#);
 @pemit %# = ulocal(%vF/F.FOOTER);
 -
 
