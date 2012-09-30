@@ -70,7 +70,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 -
 &COL.MEMBERS                            %vF = words(xget(%!, LIST.%0))
 -
-&F.FOOTER                               %vF = tail();
+&F.FOOTER                               %vF = tail()
 -
 &F.GET_DIRECTORS                        %vF = xget(#1762, LIST-CHIEFS)
 -
@@ -96,7 +96,7 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
     |
 ),|,), %2,,%3)
 -
-&F.SEPARATOR                            %vF = separator(%0, c);
+&F.SEPARATOR                            %vF = separator(%0, c)
 -
 &FIL.CONNECTED                          %vF = cand(gt(conn(%0), -1), not(hasflag(%0, DARK)))
 -
