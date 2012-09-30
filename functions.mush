@@ -57,10 +57,10 @@ think set(%!, VF:[ifelse(isdbref(setr(!, searchng(name=%[Functions%] Staff Lists
 ## ################################## ##
 &COL.NAME                               %vF = moniker(%0)[ifelse(hasattr(%0, ALIAS), %b%([xget(%0, ALIAS)]%),)]
 -
-&COL.NOTES                              %vF = xget(%!, NOTE.%0)
+&COL.NOTES                              %vF = xget(%vF, NOTE.%0)
 -
 &COL.STATUS                             %vF = ifelse(
-    ulocal(%!/FIL.CONNECTED, %0),
+    ulocal(%vF/FIL.CONNECTED, %0),
     ljust(ucstr(default(%0/STATUS, On-Duty)), 9)[rjust(singletime(idle(%0)), 4)],
     timefmt($b $02D $02h:$02T, xget(%0, LASTOFF))
 )
