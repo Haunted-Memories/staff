@@ -63,7 +63,11 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 ## ################################## ##
 ## FUNCTIONS
 ## ################################## ##
-&COL.NAME                               %vF = moniker(%0)[ifelse(hasattr(%0, ALIAS), %b%([xget(%0, ALIAS)]%),)]
+&COL.NAME                               %vF = ifelse(
+    isdbref(%0),
+    moniker(%0)[ifelse(hasattr(%0, ALIAS), %b%([xget(%0, ALIAS)]%),)],
+    %0
+)
 -
 &COL.NOTES                              %vF = xget(%vD, NOTE.%0)
 -
