@@ -83,8 +83,8 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 -
 &F.FOOTER                               %vF = ifelse(
     t(%0),
-    %cc[repeat(=, sub(width(%#), add(strlen(%0), 11)))] %%(%cn %ch%cw%0%cn %cc%)=====%cn,
-    repeat(=, width(%#))
+    %cc[repeat(=, sub(width(%#), add(strlen(%0), 11)))] %(%cn %ch%cw%0%cn %cc%)=====%cn,
+    %cc[repeat(=, width(%#))]%cn
 )
 -
 &F.GET_DIRECTORS                        %vF = xget(#1762, LIST-CHIEFS)
@@ -122,15 +122,20 @@ think set(%!, VD:[ifelse(isdbref(setr(!, searchng(name=%[Data%] Staff Lists), OB
 &I.LIST_STAFF                           %vF =
 think setq(!, ulocal(%vF/F.GET_DIRECTORS), DIRECTORS);
 think setq(!, ulocal(%vF/F.GET_ADMINS), ADMINS);
+think setq(!, add(words(r(DIRECTORS)), words(r(ADMINS))), STAFF_TOTAL);
 think setq(!, ifelse(%0, filter(%vF/FIL.CONNECTED, r(DIRECTORS)), r(DIRECTORS)), DIRECTORS);
 think setq(!, ifelse(%0, filter(%vF/FIL.CONNECTED, r(ADMINS)), r(ADMINS)), ADMINS);
+think setq(!, add(words(r(DIRECTORS)), words(r(ADMINS))), CONNECTED_TOTAL);
 @pemit %# = ulocal(%vF/F.HEADER, ifelse(%0, Connected,) Staff);
 @pemit %# = ulocal(%vF/F.COLUMN_HEADERS, STAFF);
 @pemit %# = ulocal(%vF/F.SEPARATOR, Directors);
 think ulocal(%vF/F.LIST, r(DIRECTORS), STAFF, %b, %#);
 @pemit %# = ulocal(%vF/F.SEPARATOR, Admins);
 think ulocal(%vF/F.LIST, r(ADMINS), STAFF, %b, %#);
-@pemit %# = ulocal(%vF/F.FOOTER);
+@pemit %# = ulocal(%vF/F.FOOTER, ifelse(%0,
+    [r(CONNECTED_TOTAL)]/[r(STAFF_TOTAL)] connected,
+    [r(STAFF_TOTAL)] total
+));
 -
 
 &I.LIST_TEAMS                           %vF =
